@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Dinkie;
+  src: url('@/assets/DinkieBitmap-9px.ttf');
+}
+
+@font-face {
+  font-family: FiraCode;
+  src: url('@/assets/FiraCode-Regular.ttf'), url('@/assets/FiraCode-Bold.ttf'),
+    url('@/assets/FiraCode-Light.ttf');
+}
+
+@font-face {
+  font-family: Sarasa;
+  src: url('@/assets/sarasa-regular.ttc'), url('@/assets/sarasa-bold.ttc'),
+    url('@/assets/sarasa-light.ttc');
+}
+
+html,
+body {
+  font-family: Sarasa;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #c3ffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #70579a;
+}
