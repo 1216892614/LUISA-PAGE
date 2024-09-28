@@ -1,6 +1,3 @@
-import Image from "next/image";
-
-import eyeImg from "./assets/eye.png";
 import Hero from "@/components/Hero";
 import PixelArt from "@/components/PixelArt";
 

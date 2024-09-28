@@ -6,6 +6,7 @@ import meshSvg from "@/assets/mesh.svg";
 import Image from "next/image";
 
 const FEATURE_WORDS = [
+    "GPU/CPU",
     "HIGH_PERFORMANCE",
     "CROSS_PLATFORM",
     "C++",
@@ -80,7 +81,7 @@ const Hero = () => {
                     Computing Framework
                 </div>
 
-                <div className="mt-4">For Graphics And BEYOND!</div>
+                <div className="mt-4">For Graphics and BEYOND!</div>
             </h1>
 
             <div className="absolute left-20 bottom-20 flex flex-col">
