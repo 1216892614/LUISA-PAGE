@@ -8,7 +8,7 @@ import Image from "next/image";
 const FEATURE_WORDS = [
     "HIGH_PERFORMANCE",
     "CROSS_PLATFORM",
-    "BSD-3-CLAUSE",
+    "BSD_3_CLAUSE",
     "C++",
     "Rust",
     "Python",
