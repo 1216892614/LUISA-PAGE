@@ -6,14 +6,18 @@ import meshSvg from "@/assets/mesh.svg";
 import Image from "next/image";
 
 const FEATURE_WORDS = [
-    "A GPU/CPU",
     "A HIGH_PERFORMANCE",
     "A CROSS_PLATFORM",
-    "AN OPEN_SOURCE",
+    "An OPEN_SOURCE",
     "A C++",
     "A Rust",
     "A Python",
+    "A GPU/CPU",
     "A DSL",
+    "A DirectX",
+    "A CUDA",
+    "A Metal",
+    "An ISPC",
 ];
 
 const Hero = () => {
