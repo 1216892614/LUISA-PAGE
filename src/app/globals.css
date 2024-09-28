@@ -2,32 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@font-face {
+    font-family: Dinkie;
+    src: url("/DinkieBitmap-9px.ttf");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@font-face {
+    font-family: FiraCode;
+    src: url("/FiraCode-Regular.ttf"), url("/FiraCode-Bold.ttf"),
+        url("/FiraCode-Light.ttf");
 }
 
+@font-face {
+    font-family: Sarasa;
+    src: url("/sarasa-regular.ttc"), url("/sarasa-bold.ttc"),
+        url("/sarasa-light.ttc");
+}
+
+html,
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    font-family: Sarasa;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* width */
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #c3ffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #70579a;
 }
