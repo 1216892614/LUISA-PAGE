@@ -58,7 +58,7 @@ const Hero = () => {
     }, [featureWords]);
 
     return (
-        <div className="w-screen h-[calc(100vh-5rem)] bg-primary relative border-t-2 border-slate-800 font-[Dinkie]">
+        <div className="w-screen h-[calc(100vh-5rem)] bg-primary relative font-[Dinkie]">
             <Image
                 src={meshSvg}
                 alt="mesh"
@@ -76,7 +76,7 @@ const Hero = () => {
                     >
                         {`${featureWords.str}`}
                     </span>
-                    <span className="h-full mr-4 ml-1 relative">
+                    <span className="h-full mr-2 ml-1 relative">
                         {!featureWords.isSelected && (
                             <span className="absolute bg-slate-800 h-10 w-1 -left-1" />
                         )}
