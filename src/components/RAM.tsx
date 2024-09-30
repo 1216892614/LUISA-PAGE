@@ -19,31 +19,32 @@ const animateStart = (svgEl: SVGSVGElement) => {
     // Initialize Zdog Illustration
     const illo = new Zdog.Illustration({
         element: svgEl,
+        rotate: { x: -0.5 },
     });
 
     const group = new Zdog.Group({
         addTo: illo,
-        rotate: { z: 0.2 },
     });
 
-    const boxSet = _.range(0, 3)
-        .map((x) =>
-            _.range(0, 3).map((y) =>
-                _.range(0, 3).map((z) => {
-                    const size = 10;
-                    const margin = 50;
+    const len = 5;
+    const size = 5;
+    const margin = 100;
 
+    const boxSet = _.range(0, len)
+        .map((x) =>
+            _.range(0, len).map((y) =>
+                _.range(0, len).map((z) => {
                     const box = new Zdog.Box({
-                        fill: false,
                         translate: {
-                            x: (1 - x) * (size + margin),
-                            y: (1 - y) * (size + margin),
-                            z: (1 - z) * (size + margin),
+                            x: ((len - 1) / 2 - x) * (size + margin),
+                            y: ((len - 1) / 2 - y) * (size + margin),
+                            z: ((len - 1) / 2 - z) * (size + margin),
                         },
                         width: size,
                         height: size,
                         depth: size,
-                        stroke: 0.5,
+                        stroke: 0,
+                        fill: false,
                         color: `rgb(252, 165, 165)`,
                     });
 
@@ -58,15 +59,12 @@ const animateStart = (svgEl: SVGSVGElement) => {
     // Initial render
     illo.updateRenderGraph();
 
-    _.range(0, 3).forEach(() => {
-        let lastIdx: number = 0;
-        setInterval(() => {
+    const intervals = _.range(0, 10).map(() => {
+        return setInterval(() => {
             const idx = Math.floor(boxSet.length * Math.random());
 
-            boxSet[idx].fill = true;
-            boxSet[lastIdx].fill = false;
-
-            lastIdx = idx;
+            boxSet[idx].stroke = 0.2;
+            boxSet[idx].fill = !boxSet[idx].fill;
         }, 50);
     });
 
@@ -80,10 +78,14 @@ const animateStart = (svgEl: SVGSVGElement) => {
         { signal: ctrler.signal }
     );
 
+    ctrler.signal.addEventListener("abort", () =>
+        intervals.forEach(clearInterval)
+    );
+
     return ctrler;
 };
 
-export default function TestComp() {
+export default function RAM() {
     const svgRef = useRef<SVGSVGElement>(null);
     const [svgSize, setSvgSize] = useState([
         window.innerWidth,
@@ -129,14 +131,12 @@ export default function TestComp() {
     }, [svgSize]);
 
     return (
-        <main className="w-screen h-screen overflow-hidden bg-slate-900 text-slate-900">
-            <svg
-                ref={svgRef}
-                width={svgSize[0]}
-                height={svgSize[1]}
-                viewBox={`0 0 ${svgSize[0]} ${svgSize[1]}`}
-                className="absolute top-0 left-0 w-full h-full"
-            />
-        </main>
+        <svg
+            ref={svgRef}
+            width={svgSize[0]}
+            height={svgSize[1]}
+            viewBox={`0 0 ${svgSize[0]} ${svgSize[1]}`}
+            className="absolute top-0 left-0 w-full h-full"
+        />
     );
 }

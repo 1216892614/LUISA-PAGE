@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import meshSvg from "@/assets/mesh.svg";
 import Image from "next/image";
+import RAM from "./RAM";
 
 const FEATURE_WORDS = [
     "HIGH_PERFORMANCE",
@@ -59,11 +60,7 @@ const Hero = () => {
 
     return (
         <div className="w-screen h-[calc(100vh-5rem)] bg-primary relative font-[Dinkie] overflow-hidden">
-            <Image
-                src={meshSvg}
-                alt="mesh"
-                className="absolute -right-8 -bottom-2 max-w-[1300px] min-w-[1000px]"
-            />
+            <RAM />
 
             <h1 className="absolute w-full px-14 left-1/2 top-32 -translate-x-1/2 text-4xl">
                 <div>
