@@ -18,6 +18,7 @@ const animateStart = (svgEl: SVGSVGElement) => {
 
     // Initialize Zdog Illustration
     const illo = new Zdog.Illustration({
+        dragRotate: true,
         element: svgEl,
         rotate: { x: -0.5 },
     });
@@ -28,7 +29,7 @@ const animateStart = (svgEl: SVGSVGElement) => {
 
     const len = 5;
     const size = 5;
-    const margin = 100;
+    const margin = 150;
 
     const boxSet = _.range(0, len)
         .map((x) =>
@@ -65,13 +66,13 @@ const animateStart = (svgEl: SVGSVGElement) => {
 
             boxSet[idx].stroke = 0.2;
             boxSet[idx].fill = !boxSet[idx].fill;
-        }, 50);
+        }, 300);
     });
 
     // Animation loop
     callFrame(
         (delta) => {
-            group.rotate.y += 0.001 * delta;
+            group.rotate.y += 0.0001 * delta;
 
             illo.updateRenderGraph();
         },
