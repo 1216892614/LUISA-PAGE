@@ -5,15 +5,15 @@ import { MutableRefObject, useEffect, useRef, useState } from "react";
 import _ from "lodash/fp";
 import Zdog from "zdog";
 
-const animateStart = (svgEl: SVGSVGElement) => {
+const animateStart = (cvsEl: HTMLCanvasElement) => {
     const ctrler = new AbortController();
 
-    if (!svgEl) return null;
+    if (!cvsEl) return null;
 
-    // Initialize Zdog Illustration
     const illo = new Zdog.Illustration({
         dragRotate: true,
-        element: svgEl,
+        resize: true,
+        element: cvsEl,
         rotate: { x: -0.5 },
     });
 
@@ -51,7 +51,6 @@ const animateStart = (svgEl: SVGSVGElement) => {
 
     boxSet.forEach((box) => group.addChild(box));
 
-    // Initial render
     illo.updateRenderGraph();
 
     const intervals = _.range(0, 10).map(() => {
@@ -63,7 +62,6 @@ const animateStart = (svgEl: SVGSVGElement) => {
         }, 300);
     });
 
-    // Animation loop
     callFrame(
         (delta) => {
             group.rotate.y += 0.0001 * delta;
@@ -81,20 +79,20 @@ const animateStart = (svgEl: SVGSVGElement) => {
 };
 
 export default function RAM() {
-    const svgRef = useRef<SVGSVGElement>(null);
-    const [svgSize, setSvgSize] = useState([
+    const cvsRef = useRef<HTMLCanvasElement>(null);
+    const [cvsSize, setSvgSize] = useState([
         document.body.clientWidth,
         document.body.clientHeight,
     ]);
 
     useEffect(() => {
-        const svgEl = svgRef.current;
+        const svgEl = cvsRef.current;
 
-        if (!svgEl || !svgRef.current) return;
+        if (!svgEl || !cvsRef.current) return;
 
         const ctrler = new AbortController();
 
-        let initAbort = animateStart(svgRef.current);
+        let initAbort = animateStart(cvsRef.current);
 
         addEventListener(
             "resize",
@@ -108,7 +106,6 @@ export default function RAM() {
             }
         );
 
-        // Clean up
         return () => {
             ctrler.abort();
         };
@@ -118,20 +115,14 @@ export default function RAM() {
         useRef(null);
 
     useEffect(() => {
-        if (!svgSize || !svgRef.current) return;
+        if (!cvsSize || !cvsRef.current) return;
 
         lastInitAbort.current?.abort();
 
-        lastInitAbort.current = animateStart(svgRef.current);
-    }, [svgSize]);
+        lastInitAbort.current = animateStart(cvsRef.current);
+    }, [cvsSize]);
 
     return (
-        <svg
-            ref={svgRef}
-            width={svgSize[0]}
-            height={svgSize[1]}
-            viewBox={`0 0 ${svgSize[0]} ${svgSize[1]}`}
-            className="absolute top-0 left-0 w-full h-full"
-        />
+        <canvas ref={cvsRef} className="absolute top-0 left-0 w-full h-full" />
     );
 }
