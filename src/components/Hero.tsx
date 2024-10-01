@@ -64,7 +64,7 @@ const Hero = () => {
                 <RAM />
             </LazyMount>
 
-            <h1 className="absolute w-full mx-[10vw] left-1/2 top-24 md:top-20 lg:top-16 font-[Sarasa] font-bold -translate-x-1/2 text-4xl md:text-5xl lg:text-7xl">
+            <h1 className="absolute w-full mx-[10vw] left-1/2 top-24 md:top-20 lg:top-16 pointer-events-none font-[Sarasa] font-bold -translate-x-1/2 text-4xl md:text-5xl lg:text-7xl">
                 <span className="text-blue-400">L</span>
                 <span className="text-green-400">U</span>
                 <span className="text-yellow-400">I</span>
@@ -72,7 +72,7 @@ const Hero = () => {
                 <span className="text-red-400">A</span>
             </h1>
 
-            <h2 className="absolute w-full mx-[10vw] left-1/2 top-36 -translate-x-1/2 text-xl md:text-3xl lg:text-5xl">
+            <h2 className="absolute w-full mx-[10vw] left-1/2 top-36 -translate-x-1/2 pointer-events-none text-xl md:text-3xl lg:text-5xl">
                 <div>
                     A
                     <span
