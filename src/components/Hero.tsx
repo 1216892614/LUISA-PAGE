@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 const RAM = dynamic(() => import("./RAM"), { ssr: false });
+const LazyMount = dynamic(() => import("./LazyMount"), { ssr: false });
 
 const FEATURE_WORDS = [
     "HIGH_PERFORMANCE",
@@ -59,7 +60,9 @@ const Hero = () => {
 
     return (
         <div className="w-screen h-[calc(100vh-5rem)] bg-primary relative font-[Dinkie] overflow-hidden">
-            <RAM />
+            <LazyMount className="absolute left-0 top-0 w-full h-full">
+                <RAM />
+            </LazyMount>
 
             <h1 className="absolute w-full mx-[10vw] left-1/2 top-24 md:top-20 lg:top-16 font-[Sarasa] font-bold -translate-x-1/2 text-4xl md:text-5xl lg:text-7xl">
                 <span className="text-blue-400">L</span>

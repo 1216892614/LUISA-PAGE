@@ -1,7 +1,13 @@
 "use client";
 
 import { callFrame } from "@/until/animate";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import {
+    MutableRefObject,
+    useEffect,
+    useRef,
+    useState,
+    useCallback,
+} from "react";
 import _ from "lodash/fp";
 import Zdog from "zdog";
 
@@ -65,7 +71,6 @@ const animateStart = (cvsEl: HTMLCanvasElement) => {
     callFrame(
         (delta) => {
             group.rotate.y += 0.0001 * delta;
-
             illo.updateRenderGraph();
         },
         { signal: ctrler.signal }
@@ -78,41 +83,11 @@ const animateStart = (cvsEl: HTMLCanvasElement) => {
     return ctrler;
 };
 
-export default function RAM() {
-    const cvsRef = useRef<HTMLCanvasElement>(null);
-    const [cvsSize, setSvgSize] = useState([
-        document.body.clientWidth,
-        document.body.clientHeight,
-    ]);
-
-    useEffect(() => {
-        const svgEl = cvsRef.current;
-
-        if (!svgEl || !cvsRef.current) return;
-
-        const ctrler = new AbortController();
-
-        let initAbort = animateStart(cvsRef.current);
-
-        addEventListener(
-            "resize",
-            () => {
-                initAbort?.abort();
-
-                setSvgSize([innerWidth, innerHeight]);
-            },
-            {
-                signal: ctrler.signal,
-            }
-        );
-
-        return () => {
-            ctrler.abort();
-        };
-    }, []);
-
-    const lastInitAbort: MutableRefObject<AbortController | null> =
-        useRef(null);
+const useCanvasAnimation = (
+    cvsRef: MutableRefObject<HTMLCanvasElement | null>,
+    cvsSize: readonly [number, number]
+) => {
+    const lastInitAbort = useRef<AbortController | null>(null);
 
     useEffect(() => {
         if (!cvsSize || !cvsRef.current) return;
@@ -120,9 +95,37 @@ export default function RAM() {
         lastInitAbort.current?.abort();
 
         lastInitAbort.current = animateStart(cvsRef.current);
-    }, [cvsSize]);
 
-    return (
-        <canvas ref={cvsRef} className="absolute top-0 left-0 w-full h-full" />
-    );
+        return () => {
+            lastInitAbort.current?.abort();
+        };
+    }, [cvsSize, cvsRef]);
+};
+
+export default function RAM() {
+    const cvsRef = useRef<HTMLCanvasElement>(null);
+    const [cvsSize, setSvgSize] = useState([
+        document.body.clientWidth,
+        document.body.clientHeight,
+    ] as const);
+
+    const handleResize = _.debounce(200, () => {
+        setSvgSize([window.innerWidth, window.innerHeight]);
+    });
+
+    useEffect(() => {
+        const ctrler = new AbortController();
+
+        window.addEventListener("resize", handleResize, {
+            signal: ctrler.signal,
+        });
+
+        return () => {
+            ctrler.abort();
+        };
+    }, [handleResize]);
+
+    useCanvasAnimation(cvsRef, cvsSize);
+
+    return <canvas ref={cvsRef} className="w-full h-full" />;
 }

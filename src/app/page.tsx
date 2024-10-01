@@ -10,6 +10,8 @@ export default function Home() {
             <Hero />
 
             <div className="w-screen h-[calc(100vh-5rem)]"></div>
+
+            <div className="w-screen h-[calc(100vh-5rem)]"></div>
         </main>
     );
 }
