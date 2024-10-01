@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
-import meshSvg from "@/assets/mesh.svg";
-import Image from "next/image";
-import RAM from "./RAM";
+const RAM = dynamic(() => import("./RAM"), { ssr: false });
 
 const FEATURE_WORDS = [
     "HIGH_PERFORMANCE",

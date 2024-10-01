@@ -1,13 +1,7 @@
 "use client";
 
 import { callFrame } from "@/until/animate";
-import {
-    MutableRefObject,
-    useCallback,
-    useEffect,
-    useRef,
-    useState,
-} from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import _ from "lodash/fp";
 import Zdog from "zdog";
 
@@ -89,8 +83,8 @@ const animateStart = (svgEl: SVGSVGElement) => {
 export default function RAM() {
     const svgRef = useRef<SVGSVGElement>(null);
     const [svgSize, setSvgSize] = useState([
-        window.innerWidth,
-        window.innerHeight,
+        document.body.clientWidth,
+        document.body.clientHeight,
     ]);
 
     useEffect(() => {
@@ -102,12 +96,12 @@ export default function RAM() {
 
         let initAbort = animateStart(svgRef.current);
 
-        window.addEventListener(
+        addEventListener(
             "resize",
             () => {
                 initAbort?.abort();
 
-                setSvgSize([window.innerWidth, window.innerHeight]);
+                setSvgSize([innerWidth, innerHeight]);
             },
             {
                 signal: ctrler.signal,
