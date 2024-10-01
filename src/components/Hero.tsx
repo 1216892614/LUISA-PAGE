@@ -61,7 +61,7 @@ const Hero = () => {
         <div className="w-screen h-[calc(100vh-5rem)] bg-primary relative font-[Dinkie] overflow-hidden">
             <RAM />
 
-            <h1 className="absolute w-full mx-[10vw] left-1/2 top-40 md:top-32 lg:top-28 font-[Sarasa] font-bold -translate-x-1/2 text-4xl md:text-5xl lg:text-7xl">
+            <h1 className="absolute w-full mx-[10vw] left-1/2 top-16 font-[Sarasa] font-bold -translate-x-1/2 text-4xl md:text-5xl lg:text-7xl">
                 <span className="text-blue-400">L</span>
                 <span className="text-green-400">U</span>
                 <span className="text-yellow-400">I</span>
@@ -69,7 +69,7 @@ const Hero = () => {
                 <span className="text-red-400">A</span>
             </h1>
 
-            <h2 className="absolute w-full mx-[10vw] left-1/2 top-52 -translate-x-1/2 text-xl md:text-3xl lg:text-5xl">
+            <h2 className="absolute w-full mx-[10vw] left-1/2 top-36 -translate-x-1/2 text-xl md:text-3xl lg:text-5xl">
                 <div>
                     A
                     <span
@@ -93,16 +93,16 @@ const Hero = () => {
                 <div className="mt-4">For Graphics and BEYOND!</div>
             </h2>
 
-            <div className="absolute w-full mx-[10vw] left-1/2 top-96 -translate-x-1/2 text-xl flex flex-row items-start pr-2 [&>*]:mx-2 [&>*]:px-1">
-                <a className="hover:text-primary hover:bg-slate-300 text-slate-800 cursor-pointer">
+            <div className="absolute w-full mx-[10vw] left-1/2 top-80 -translate-x-1/2 text-xl flex flex-row items-start pr-2 [&>*]:mx-2 [&>*]:px-1">
+                <a className="hover:text-primary hover:bg-blue-400 text-slate-800 cursor-pointer">
                     Get Start
                 </a>
 
-                <a className="hover:text-primary hover:bg-slate-300 text-slate-800 cursor-pointer">
+                <a className="hover:text-primary hover:bg-green-400 text-slate-800 cursor-pointer">
                     Why LUISA?
                 </a>
 
-                <a className="hover:text-primary hover:bg-slate-300 text-slate-800 cursor-pointer">
+                <a className="hover:text-primary hover:bg-yellow-400 text-slate-800 cursor-pointer">
                     Migrate from...
                 </a>
             </div>
